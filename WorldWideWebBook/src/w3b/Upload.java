@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
 
 import w3b.Entidades.Imagen;
 
@@ -58,7 +59,7 @@ public abstract class Upload {
       
       // Parse the request to get file items.
       List fileItems = upload.parseRequest(request);
- 
+
       // Process the uploaded file items
       Iterator i = fileItems.iterator();
  String url="";
