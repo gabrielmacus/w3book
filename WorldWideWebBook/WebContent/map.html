@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+   	
+   var map;
+   var markers = [];
+   // Adds a marker to the map and push to the array.
+   function changeMarker(location)
+   {
+	   
+	     var marker = new google.maps.Marker({
+	       position: location,
+	       map: map
+	     });
+	     google.maps.event.addListener(marker, 'click', function(event) {
+	    	 
+	         
+	   
+	         deleteMarker(marker.position);
+
+	 });
+	     markers.push(marker);  
+   }
+   function addMarker(location) {
+
+	   
+     var marker = new google.maps.Marker({
+       position: location,
+       map: map
+     });
+		sendCrossMessage(location.lat()+";"+location.lng()       /*'{"lat":"'+location.lat()+'","lng":"'+location.lng()+'"}'*/,"*");
+     google.maps.event.addListener(marker, 'click', function(event) {
+    	 
+         
+   
+         deleteMarker(marker.position);
+         sendCrossMessage("","*");
+
+ });
+     markers.push(marker);
+   }
+
+   // Sets the map on all markers in the array.
+   function setMapOnAll(map) {
+     for (var i = 0; i < markers.length; i++) {
+       markers[i].setMap(map);
+     }
+   }
+   function deleteMarker(position)
+   {
+   	for(var i=0;i<markers.length;i++)
+   	{
+   		if(markers[i].position===position)
+   		{
+                
+                markers[i].setMap(null);
+   		}
+   	}
+           
+   }
+   // Removes the markers from the map, but keeps them in the array.
+   function clearMarkers() {
+     setMapOnAll(null);
+   }
+
+   // Shows any markers currently in the array.
+   function showMarkers() {
+     setMapOnAll(map);
+   }
+
+   // Deletes all markers in the array by removing references to them.
+   function deleteMarkers() {
+     clearMarkers();
+     markers = [];
+   }
+      
+   
+   
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 6
+        });
+        
+       
+        // This event listener will call addMarker() when the map is clicked.
+        map.addListener('click', function(event) {
+        deleteMarkers();
+
+
+    
+          addMarker(event.latLng);
+          
+        });
+        
+        
+
+        var infoWindow = new google.maps.InfoWindow({map: map});
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Tu ciudad');
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+      
+   
+
+
+
+    </script>
+    	<script type="text/javascript">
+    
+    
+    	function sendCrossMessage(msg,url)
+    	{ parent.postMessage(msg,url);
+        
+    	}
+    	
+    	function displayMessage (evt) {
+    		var origin = evt.origin || evt.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
+    		if (origin === "http://localhost:8080") {
+    			 clearMarkers();
+    	    //	 alert("LOCA:"+evt.data.split(","));//new google.maps.LatLng(
+    	    	var loc = new google.maps.LatLng(evt.data.split(";")[0],evt.data.split(";")[1]);
+    	    	changeMarker(loc);
+    		}
+    	
+
+    	}
+
+    	if (window.addEventListener) {
+
+    		// For standards-compliant web browsers
+    		window.addEventListener("message", displayMessage, false);
+    	}
+    	else {
+    		window.attachEvent("onmessage", displayMessage);
+    	}
+		</script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDG7j3IlhLsZW2ESNJJDzMBdEAfwwmUj0&callback=initMap">
+    </script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+
+
+.thumbnail
+{width:100%;
+	height: 280px;
+}
+.field-card
+{
+	height: 120px;
+}
+/* .img-container:hover > img
+{
+
+
+    -webkit-animation: boxanim 2s infinite; /* Chrome, Safari, Opera */
+ /*   animation: boxanim 2s infinite ;
+}
+*/
+  
+/* Chrome, Safari, Opera */
+@-webkit-keyframes boxanim {
+/* from { -webkit-transform: rotateY(0deg)}*/
+    to {  -webkit-transform: rotateY(360deg)}
+}
+
+@keyframes boxanim {
+   /* from {transform: rotateZ(-30deg)}*/
+    to { transform: rotateY(360deg)}
+}
+
+@media (max-width:1770px) and (min-width:1581px)
+{
+	
+.thumbnail
+{width:100%;
+	height: 250px;
+}
+}
+
+@media (max-width:1580px) and (min-width:1301px)
+{
+	
+.thumbnail
+{width:100%;
+	height: 200px;
+}
+}
+
+@media (max-width:1300px) and (min-width:993px)
+{
+	
+.thumbnail
+{
+	height: 150px;
+width:100%;
+}
+}
+@media (max-width:992px) and (min-width:410px)
+{
+	
+.thumbnail
+{width:100%;
+	height: 350px;
+}
+}
+
+@media (max-width:409px)  and (min-width:375px)
+{
+	
+.thumbnail
+{width:100%;
+	height: 300px;
+}
+}
+
+@media (max-width:374px) and (min-width:340px)
+{
+	
+.thumbnail
+{width:100%;
+	height: 250px;
+}
+}
+
+@media (max-width:339px) 
+{
+	
+.thumbnail
+{width:100%;
+	height: 200px;
+}
+}

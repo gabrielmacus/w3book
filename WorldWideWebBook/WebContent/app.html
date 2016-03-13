@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet"
+	href="http://www.w3schools.com/lib/w3-theme-blue.css">
+
+
+<link rel="stylesheet" href="css/estilo.css">
+<title>W3Book</title>
+
+
+<!-- ========= -->
+<!-- Libraries -->
+<!-- ========= -->
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"
+	type="text/javascript"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"
+	type="text/javascript"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"
+	type="text/javascript"></script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+<script src="js/countries.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="js/imgupload.js"></script>
+</head>
+<body>
+	<!-- ========= -->
+	<!-- Your HTML -->
+	<!-- ========= -->
+
+	<h2 class="w3-center ">Informacion básica</h2>
+	<form enctype="multipart/form-data" method="post" action="publish.jsp">
+		<div class="w3-row">
+
+			<div class="w3-col l2">&nbsp;</div>
+			<div class="w3-col s12 m6 l4 w3-padding-small w3-animate-left">
+				<div class="w3-card-4">
+
+					<header class="w3-container w3-theme-d1 ">
+						<label class="w3-center"><h3>Titulo de la publicacion</h3></label>
+					</header>
+
+					<div class="field-card w3-container"  style="height: 120px">
+						<br> <input class="w3-input" type="text"> <br>
+					</div>
+
+
+					<footer class="w3-container w3-theme-d1">
+						<h5>Un titulo que llame la atencion de tus potenciales
+							clientes</h5>
+					</footer>
+
+				</div>
+			</div>
+
+			<div class="w3-col s12 m6 l4 w3-padding-small w3-animate-right">
+
+				<div class="w3-card-4">
+
+					<header class="w3-container w3-theme-d1">
+						<label class="w3-center"><h3>Descripcion de la
+								publicacion</h3></label>
+					</header>
+
+					<div class="w3-container" style="height: 120px">
+						<br>
+						<textarea rows="1" class="w3-input" cols="1"></textarea>
+						<br>
+					</div>
+
+
+					<footer class="w3-container w3-theme-d1">
+						<h5>Contanos lo que hacés!</h5>
+					</footer>
+
+				</div>
+			</div>
+			<div class="w3-col l2">&nbsp;</div>
+
+
+		</div>
+
+		<!-- ----------------------- -->
+		<h2 class="w3-center ">Datos de contacto</h2>
+		<div class="w3-row">
+
+			<div class="w3-col l2">&nbsp;</div>
+			<div class="w3-col s12 m12 l4 w3-padding-small w3-animate-left">
+				<div class="w3-card-4">
+
+					<header class="w3-container w3-theme-d1">
+						<label class="w3-center"><h3>Teléfono/s de contacto</h3></label>
+					</header>
+
+					<div class="w3-container"  style="height:220px">
+						<br> <select id="phone-list" class="w3-input">
+						</select> <br>
+						<div class="w3-row">
+							<div class="w3-col s12">
+								<input id="new-phone" class="w3-input" type="number">
+							</div>
+						</div>
+						<br>
+						<div class="w3-row">
+
+							<button onclick="removePhone()"
+								class="w3-btn w3-ripple w3-red w3-half" type="button">-</button>
+							<button onclick="addPhone()" type="button"
+								class="w3-btn w3-ripple w3-green w3-half">+</button>
+
+						</div>
+					
+					</div>
+
+		
+					<footer class="w3-container w3-theme-d1">
+						<h5>Muy importante para que te localicen</h5>
+					</footer>
+
+				</div>
+			</div>
+
+			<div class="w3-col s12 m12 l4 w3-padding-small w3-animate-right">
+
+				<div class="w3-card-4">
+
+					<header class="w3-container w3-theme-d1">
+						<label class="w3-center"><h3>Horario de contacto</h3></label>
+					</header>
+
+					<div class="w3-container"  style="height:220px" >
+						<h5>Desde</h5>
+						<div class="w3-row">
+							<div class="w3-col s12 ">
+								<div class="w3-row">
+									<div class="w3-col s5">
+										<input class="w3-input" type="number" min=0 max=23 value="00">
+									</div>
+									<div class="w3-col s2 w3-center">:</div>
+
+									<div class="w3-col s5">
+										<input class="w3-input" type="number" min=0 max=59 value="00">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<br>
+						<h5>Hasta</h5>
+						<div class="w3-row">
+							<div class="w3-col s12 ">
+								<div class="w3-row">
+									<div class="w3-col s5">
+										<input class="w3-input" type="number" min=0 max=23 value="00">
+									</div>
+									<div class="w3-col s2 w3-center">:</div>
+
+									<div class="w3-col s5">
+										<input class="w3-input" type="number" min=0 max=59 value="00">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<br>
+					</div>
+
+
+					<footer class="w3-container w3-theme-d1">
+						<h5>Decinos cuando encontrarte</h5>
+					</footer>
+
+				</div>
+			</div>
+			<div class="w3-col l2 ">&nbsp;</div>
+
+		</div>
+		<!-- ------------------- -->
+		<div class="w3-row">
+			<div class="w3-col l2">&nbsp;</div>
+			<div class="w3-col m12 l8  w3-padding-small w3-animate-bottom ">
+
+				<div class="w3-card-4">
+
+					<header class="w3-container w3-theme-d1">
+						<label class="w3-center"><h3>Direccion/es</h3></label>
+					</header>
+
+					<div class="w3-container">
+						<br> <select id="address-list" class="w3-input">
+						</select> <br>
+						<div class="w3-row">
+							<div class="w3-col s12 m6 w3-padding-small">
+								<input id="new-address-st" class="w3-input" type="text"
+									placeholder="Calle">
+							</div>
+							<div class="w3-col s12 m6 w3-padding-small">
+								<input id="new-address-number" class="w3-input" type="number"
+									placeholder="Numero">
+							</div>
+						</div>
+						<div class="w3-row">
+							<div class="w3-col s12 m4 w3-padding-small">
+								<select class="w3-input" id="new-address-country">
+									<option disabled selected>Pais</option>
+
+								</select>
+							</div>
+							<div class="w3-col s12 m4 w3-padding-small">
+								<select class="w3-input" id="new-address-state">
+									<option disabled selected>Provincia</option>
+									<option id='add-state'>Nueva...</option>
+								</select>
+							</div>
+							<div class="w3-col s12 m4 w3-padding-small">
+								<select class="w3-input" id="new-address-city">
+									<option disabled selected>Localidad</option>
+									<option id='add-localidad'>Nueva...</option>
+								</select>
+							</div>
+						</div>
+						<br>
+						<div class="w3-row">
+
+							<button onclick="removeAddress()"
+								class="w3-btn w3-ripple w3-red w3-half" type="button">-</button>
+							<button onclick="addAddress()" type="button"
+								class="w3-btn w3-ripple w3-green w3-half">+</button>
+
+						</div>
+						<br>
+					</div>
+
+					<br>
+					<footer class="w3-container w3-theme-d1">
+						<h5>Decinos donde encontrarte</h5>
+					</footer>
+
+				</div>
+			</div>
+			<div class="w3-col l2">&nbsp;</div>
+		</div>
+		<!-- ---------------- -->
+
+		<div class="w3-row">
+			<div class="w3-col l2">&nbsp;</div>
+			<div
+				class="w3-accordion w3-light-grey w3-col m12 l8 w3-padding-small">
+
+				<button type="button" onclick="myFunction('Demo3')"
+					class="w3-btn-block "
+					style="background-image: url('img/dots_map.jpg'); background-position: center; background-repeat: no-repeat;">
+					<strong>Ubica tu negocio (opcional)</strong>
+				</button>
+				<div id="Demo3" class="w3-accordion-content w3-container w3-center"
+					style="height: 100%">
+					<div class="w3-row w3-center">
+						<h4>Asignale una ubicacion en el mapa a la direccion
+							seleccionada:</h4>
+
+						<div class="w3-col s12">
+							<iframe class="w3-border w3-card-4" width="100%" height="500px"
+								id="map-frame" src="map.html"></iframe>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="w3-col l2">&nbsp;</div>
+		</div>
+		<!-- ------ -->
+		<div class="w3-row ">
+			<div class="w3-col l2">&nbsp;</div>
+			<div class="w3-col s12 m12 l8   w3-animate-bottom  w3-padding-small ">
+
+				<div class="w3-card-4">
+
+					<header class="w3-container w3-theme-d1">
+						<label class="w3-center"><h3>Imagenes (máximo 6)</h3></label>
+					</header>
+					<br>
+					<div align="center" class="w3-container ">
+
+						<div class="w3-row w3-padding-small  ">
+
+							<div class=" w3-col s12 m6 l2 img-container">
+								<img id="img_1" class=" w3-center  w3-border thumbnail"
+									src="img/generic.png"> <input name="1" hidden type="file">
+								<button type="button"
+									class="w3-padding-small w3-border w3-red w3-btn w3-col s12 delete-image">
+									<i class="material-icons">delete</i>
+								</button>
+								<button type="button"
+									class="w3-padding-small w3-border w3-green w3-btn w3-col s12  full-size">
+									<i class="material-icons">search</i>
+								</button>
+
+							</div>
+							<div class=" w3-col s12 m6 l2  img-container">
+								<img id="img_2" class=" w3-center  w3-border  thumbnail"
+									src="img/generic.png"> <input name="2" hidden type="file">
+								<input hidden type="file">
+								<button type="button"
+									class="w3-padding-small  w3-border w3-red w3-btn w3-col s12  delete-image">
+									<i class="material-icons">delete</i>
+								</button>
+								<button type="button"
+									class="w3-padding-small w3-border w3-green w3-btn w3-col s12  full-size">
+									<i class="material-icons">search</i>
+								</button>
+
+							</div>
+
+							<div class=" w3-col s12 m6 l2  img-container">
+								<img id="img_3" class=" w3-center  w3-border  thumbnail"
+									src="img/generic.png"> <input name="3" hidden type="file">
+								<button type="button"
+									class="w3-padding-small  w3-border w3-red w3-btn w3-col s12  delete-image">
+									<i class="material-icons">delete</i>
+								</button>
+								<button type="button"
+									class="w3-padding-small w3-border w3-green w3-btn w3-col s12  full-size">
+									<i class="material-icons">search</i>
+								</button>
+
+							</div>
+
+
+							<div class=" w3-col s12 m6 l2  img-container">
+								<img id="img_4" class=" w3-center  w3-border  thumbnail"
+									src="img/generic.png"> <input name="4" hidden type="file">
+								<button type="button"
+									class="w3-padding-small  w3-border w3-red w3-btn w3-col s12  delete-image">
+									<i class="material-icons">delete</i>
+								</button>
+								<button type="button"
+									class="w3-padding-small w3-border w3-green w3-btn w3-col s12  full-size">
+									<i class="material-icons">search</i>
+								</button>
+
+							</div>
+
+							<div class=" w3-col s12 m6 l2  img-container">
+								<img id="img_5" class=" w3-center  w3-border  thumbnail"
+									src="img/generic.png"> <input name="5" hidden type="file">
+								<button type="button"
+									class="w3-padding-small  w3-border w3-red w3-btn w3-col s12  delete-image">
+									<i class="material-icons">delete</i>
+								</button>
+								<button type="button"
+									class="w3-padding-small w3-border w3-green w3-btn w3-col s12 full-size">
+									<i class="material-icons">search</i>
+								</button>
+
+							</div>
+
+							<div class=" w3-col s12 m6 l2 img-container">
+								<img id="img_6" class=" w3-center  w3-border  thumbnail"
+									src="img/generic.png"> <input name="6" hidden type="file">
+								<button type="button"
+									class="w3-padding-small  w3-border w3-red w3-btn w3-col s12  delete-image">
+									<i class="material-icons">delete</i>
+								</button>
+								<button type="button"
+									class="w3-padding-small w3-border w3-green w3-btn w3-col s12 full-size">
+									<i class="material-icons">search</i>
+								</button>
+
+							</div>
+
+							<!-- modal -->
+							<div id="modal01" class="w3-modal w3-animate-zoom"
+								onclick="this.style.display='none'">
+								<img class="w3-modal-content" src="">
+							</div>
+							<!-- endmodal -->
+						</div>
+						<br>
+						<h4 class="w3-center">Click los cuadros para seleccionar una
+							imagen</h4>
+
+					</div>
+
+					<br>
+					<footer class="w3-container w3-theme-d1">
+						<h5>Agrega imagenes para que tu post sea mas vistoso</h5>
+					</footer>
+
+
+				</div>
+			</div>
+			<div class="w3-col l2">&nbsp;</div>
+		</div>
+
+
+
+		<script>
+			function myFunction(id) {
+				document.getElementById(id).classList.toggle("w3-show");
+			}
+		</script>
+
+
+
+		<!-- ------------------------------------ -->
+
+		<br>
+		<div class="w3-row w3-center">
+
+			<input type="submit" value="Crear post!"
+				class="w3-btn w3-green w3-xlarge w3-text-shadow">
+
+
+		</div>
+		<br> <br>
+	</form>
+	<!-- =============== -->
+	<!-- Javascript code -->
+	<!-- =============== -->
+	<script type="text/javascript">
+		//Publicacion = Backbone.Model.extend();
+		SelectionList = Backbone.Model.extend({
+			initialize : function() {
+			},
+
+			defaults : {
+
+				datos : []
+			},
+			addDato : function(newDato) {
+				var datosarray = this.get("datos");
+				datosarray.push(newDato);
+				this.set({
+					datos : datosarray
+				});
+			},
+			removeDato : function(dato) {
+				var datosarray = this.get("datos");
+
+				for (var i = 0; i < datosarray.length; i++) {
+
+					if ($.trim(dato) === $.trim(datosarray[i])) {
+						datosarray.splice(i, 1);
+					}
+				}
+
+				this.set({
+					datos : datosarray
+				});
+			}
+		});
+
+		var listaTelefonos = new SelectionList();
+		var listaDirecciones = new SelectionList();
+		//listaTelefonos.addDato("1234");
+
+		var ListView = Backbone.View.extend({
+			// el - stands for element. Every view has an element associated with HTML content, will be rendered.
+			//	el : $('#phone-list'),
+			// It's the first function called when this view is instantiated.
+			initialize : function() {
+				this.render();
+			},
+			// $el - it's a cached jQuery object (el), in which you can use jQuery functions to push content. Like the Hello TutorialsPoint in this case.
+
+			render : function() {
+
+				var modelo = this.model.get("datos");
+				//	$(this.el).html("");
+
+				var elements = $(this.el).find("option");
+
+				if (elements.length <= modelo.length) {//agrega
+					for (var i = 0; i < modelo.length; i++) {
+
+						var appendIt = true;
+
+						for (var j = 0; j < elements.length; j++) {
+							if ($.trim($(elements[j]).html()) === $
+									.trim(modelo[i])) {
+								appendIt = false;
+							}
+						}
+						if (appendIt) {
+							$(this.el).append(
+									"<option>" + modelo[i] + "</option>");
+						}
+					}
+
+				} else //elimina
+				{
+					//alert("ELIMINANDO "+modelo.length+" "+elements.length);
+
+					for (var i = 0; i < elements.length; i++) {
+
+						var exist = false;
+						for (var j = 0; j < modelo.length; j++) {
+
+							if ($.trim(modelo[j]) === $.trim($(elements[i])
+									.html())) {
+								exist = true;
+
+							}
+						}
+
+						if (!exist) {
+							//	alert("A eliminar:"+$(elements[i]).html());
+							//elementsToremove+=";"+i; 
+							$(elements[i]).remove();
+						}
+
+					}
+
+				}
+
+				$(this.el).val(modelo[modelo.length - 1]);
+				$(this.el).change();
+				//$(this.el).prop('selectedIndex',0);
+
+				//$(this.el).val(modelo[modelo.length - 1]);
+			}
+		});
+
+		var telView = new ListView({
+			model : listaTelefonos,
+			el : $('#phone-list')
+		});
+
+		var addressView = new ListView({
+
+			model : listaDirecciones,
+			el : $('#address-list')
+		});
+		function addPhone() {
+
+			var newPhone = $("#new-phone").val();
+
+			if (newPhone)
+				listaTelefonos.addDato(newPhone);
+			telView.render();
+			$("#new-phone").val(" ");
+		}
+
+		$(document)
+				.on(
+						"change",
+						"#new-address-country",
+						function() {
+
+							if ($('#new-address-country :selected').val() == "AR") {
+								cargarProvinciasArgentina();
+
+							} else {
+
+								$('#new-address-state')
+										.html(
+												"<option disabled selected>Provincia</option><option id='add-state'>Nueva...</option>");
+
+								$('#new-address-city')
+										.html(
+												"<option disabled selected>Localidad</option><option id='add-city'>Nueva...</option>");
+
+							}
+
+						});
+
+		$(document)
+				.on(
+						"change",
+						"#new-address-state",
+						function() {
+
+							cargarLocalidadesArgentina($(
+									"#new-address-state :selected").attr(
+									"data-id"));
+
+						});
+		function sortResults(prop, asc, obj) {
+			var json = obj.sort(function(a, b) {
+				if (asc)
+					return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1
+							: 0);
+				else
+					return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1
+							: 0);
+			});
+
+			return json;
+		}
+		function cargarProvinciasArgentina() {
+			$.get("get_provincias.jsp")
+					.done(
+							function(data) {
+								var obj = JSON.parse(data);
+								$("#new-address-state").html("");
+								for (var i = 0; i < obj.length; i++) {
+
+									$("#new-address-state").append(
+											"<option data-id='"+obj[i].id+"'>"
+													+ obj[i].nombre
+													+ "</option>");
+
+								}
+
+								cargarLocalidadesArgentina($(
+										"#new-address-state :selected").attr(
+										"data-id"));
+
+							});
+
+		}
+		function cargarLocalidadesArgentina(id_provincia) {
+
+			$.get("search_localidad.jsp", {
+				id : id_provincia
+			}).done(
+					function(data) {
+						var obj = JSON.parse(data);
+						obj = sortResults("nombre", true, obj);
+
+						$("#new-address-city").html("");
+						for (var i = 0; i < obj.length; i++) {
+
+							$("#new-address-city").append(
+									"<option data-id='"+obj[i].id+"'>"
+											+ obj[i].nombre + "</option>");
+
+						}
+					});
+
+		}
+		$(document)
+				.on(
+						"change",
+						"#address-list",
+						function() {
+
+							var iframe = document.getElementById("map-frame").contentWindow, myMessage = $(
+									'#address-list :selected').attr(
+									'data-location');
+
+							iframe.postMessage(myMessage,
+									"http://localhost:8080");
+
+						});
+		function removePhone() {
+			//var indice = $("#phone-list").prop('selectedIndex');
+			listaTelefonos.removeDato($("#phone-list").val());
+			telView.render();
+			$("#new-phone").val(" ");
+		}
+		function addAddress() {
+			var calle = $('#new-address-st').val();
+			var numero = $('#new-address-number').val();
+			var pais = $('#new-address-country :selected').html();
+			var ciudad = $('#new-address-city').val();
+			var provincia = $('#new-address-state').val();
+			if (calle && numero && pais && ciudad && provincia)
+
+				var newAddress = calle + " " + numero + ", " + ciudad + ", "
+						+ provincia + ", " + pais;
+			newAddress = newAddress.toUpperCase();
+			listaDirecciones.addDato(newAddress);
+			addressView.render();
+
+		}
+		function removeAddress() {
+
+			//		var indice = $("#address-list").prop('selectedIndex');
+
+			listaDirecciones.removeDato($("#address-list").val());
+			addressView.render();
+			$("#new-address").val(" ");
+		}
+		function setLocation(loc) {
+			var seleccionado = $("#address-list :selected");
+
+			seleccionado.attr("data-location", loc);
+		}
+		window.onload = function() {
+
+			window.addEventListener("message", receiveMessage, false);
+
+		}
+		function receiveMessage(event) {
+			var origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
+
+			if (event.origin === "http://localhost:8080") {
+
+				setLocation(event.data);
+			}
+
+		}
+
+		function sendCrossMessage(msg, url) {
+			top.postMessage(msg, url);
+
+		}
+	</script>
+
+</body>
+</html>

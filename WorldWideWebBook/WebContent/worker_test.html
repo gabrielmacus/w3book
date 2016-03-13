@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+
+var worker = new Worker('js/workertest.js'); 
+worker.addEventListener('message', function(e) {
+	alert('Respuesta del Worker: ' + e.data);
+	}, false);
+	
+	worker.postMessage("PAPA");
+</script>
+</head>
+<body>
+
+</body>
+</html>
