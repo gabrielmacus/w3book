@@ -51,8 +51,9 @@
 						<label class="w3-center"><h3>Titulo de la publicacion</h3></label>
 					</header>
 
-					<div class="field-card w3-container"  style="height: 120px">
-						<br> <input name="title" class="w3-input" type="text"> <br>
+					<div class="field-card w3-container" style="height: 120px">
+						<br> <input name="title" class="w3-input" type="text">
+						<br>
 					</div>
 
 
@@ -103,8 +104,9 @@
 						<label class="w3-center"><h3>Teléfono/s de contacto</h3></label>
 					</header>
 
-					<div class="w3-container"  style="height:220px">
-						<br> <select id="phone-list" name="phone-list" class="w3-input">
+					<div class="w3-container" style="height: 220px">
+						<br> <select id="phone-list" name="phone-list"
+							class="w3-input">
 						</select> <br>
 						<div class="w3-row">
 							<div class="w3-col s12">
@@ -120,10 +122,10 @@
 								class="w3-btn w3-ripple w3-green w3-half">+</button>
 
 						</div>
-					
+
 					</div>
 
-		
+
 					<footer class="w3-container w3-theme-d1">
 						<h5>Muy importante para que te localicen</h5>
 					</footer>
@@ -139,18 +141,20 @@
 						<label class="w3-center"><h3>Horario de contacto</h3></label>
 					</header>
 
-					<div class="w3-container"  style="height:220px" >
+					<div class="w3-container" style="height: 220px">
 						<h5>Desde</h5>
 						<div class="w3-row">
 							<div class="w3-col s12 ">
 								<div class="w3-row">
 									<div class="w3-col s5">
-										<input class="w3-input" type="number" min=0 max=23 value="00">
+										<input name="from-hours" class="w3-input" type="number" min=0
+											max=23 value="00">
 									</div>
 									<div class="w3-col s2 w3-center">:</div>
 
 									<div class="w3-col s5">
-										<input class="w3-input" type="number" min=0 max=59 value="00">
+										<input name="from-minutes" class="w3-input" type="number"
+											min=0 max=59 value="00">
 									</div>
 								</div>
 							</div>
@@ -162,12 +166,14 @@
 							<div class="w3-col s12 ">
 								<div class="w3-row">
 									<div class="w3-col s5">
-										<input class="w3-input" type="number" min=0 max=23 value="00">
+										<input name="to-hours" class="w3-input" type="number" min=0
+											max=23 value="00">
 									</div>
 									<div class="w3-col s2 w3-center">:</div>
 
 									<div class="w3-col s5">
-										<input class="w3-input" type="number" min=0 max=59 value="00">
+										<input name="to-minutes" class="w3-input" type="number" min=0
+											max=59 value="00">
 									</div>
 								</div>
 							</div>
@@ -198,7 +204,8 @@
 					</header>
 
 					<div class="w3-container">
-						<br> <select id="address-list" class="w3-input">
+						<br> <select name="address-list" id="address-list"
+							class="w3-input">
 						</select> <br>
 						<div class="w3-row">
 							<div class="w3-col s12 m6 w3-padding-small">
@@ -220,13 +227,13 @@
 							<div class="w3-col s12 m4 w3-padding-small">
 								<select class="w3-input" id="new-address-state">
 									<option disabled selected>Provincia</option>
-									<option id='add-state'>Nueva...</option>
+									<!-- 	<option id='add-state'>Nueva...</option> -->
 								</select>
 							</div>
 							<div class="w3-col s12 m4 w3-padding-small">
 								<select class="w3-input" id="new-address-city">
 									<option disabled selected>Localidad</option>
-									<option id='add-localidad'>Nueva...</option>
+									<!-- 	<option id='add-localidad'>Nueva...</option>-->
 								</select>
 							</div>
 						</div>
@@ -429,127 +436,38 @@
 	<!-- Javascript code -->
 	<!-- =============== -->
 	<script type="text/javascript">
-		//Publicacion = Backbone.Model.extend();
-		SelectionList = Backbone.Model.extend({
-			initialize : function() {
-			},
+		$(document).ready(function() {
 
-			defaults : {
-
-				datos : []
-			},
-			addDato : function(newDato) {
-				var datosarray = this.get("datos");
-				datosarray.push(newDato);
-				this.set({
-					datos : datosarray
-				});
-			},
-			removeDato : function(dato) {
-				var datosarray = this.get("datos");
-
-				for (var i = 0; i < datosarray.length; i++) {
-
-					if ($.trim(dato) === $.trim(datosarray[i])) {
-						datosarray.splice(i, 1);
-					}
-				}
-
-				this.set({
-					datos : datosarray
-				});
-			}
+			$('#new-address-country').val('AR');
+			$('#new-address-country').change();
 		});
 
-		var listaTelefonos = new SelectionList();
-		var listaDirecciones = new SelectionList();
-		//listaTelefonos.addDato("1234");
-
-		var ListView = Backbone.View.extend({
-			// el - stands for element. Every view has an element associated with HTML content, will be rendered.
-			//	el : $('#phone-list'),
-			// It's the first function called when this view is instantiated.
-			initialize : function() {
-				this.render();
-			},
-			// $el - it's a cached jQuery object (el), in which you can use jQuery functions to push content. Like the Hello TutorialsPoint in this case.
-
-			render : function() {
-
-				var modelo = this.model.get("datos");
-				//	$(this.el).html("");
-
-				var elements = $(this.el).find("option");
-
-				if (elements.length <= modelo.length) {//agrega
-					for (var i = 0; i < modelo.length; i++) {
-
-						var appendIt = true;
-
-						for (var j = 0; j < elements.length; j++) {
-							if ($.trim($(elements[j]).html()) === $
-									.trim(modelo[i])) {
-								appendIt = false;
-							}
-						}
-						if (appendIt) {
-							$(this.el).append(
-									"<option>" + modelo[i] + "</option>");
-						}
-					}
-
-				} else //elimina
-				{
-					//alert("ELIMINANDO "+modelo.length+" "+elements.length);
-
-					for (var i = 0; i < elements.length; i++) {
-
-						var exist = false;
-						for (var j = 0; j < modelo.length; j++) {
-
-							if ($.trim(modelo[j]) === $.trim($(elements[i])
-									.html())) {
-								exist = true;
-
-							}
-						}
-
-						if (!exist) {
-							//	alert("A eliminar:"+$(elements[i]).html());
-							//elementsToremove+=";"+i; 
-							$(elements[i]).remove();
-						}
-
-					}
-
-				}
-
-				$(this.el).val(modelo[modelo.length - 1]);
-				$(this.el).change();
-				//$(this.el).prop('selectedIndex',0);
-
-				//$(this.el).val(modelo[modelo.length - 1]);
-			}
-		});
-
-		var telView = new ListView({
-			model : listaTelefonos,
-			el : $('#phone-list')
-		});
-
-		var addressView = new ListView({
-
-			model : listaDirecciones,
-			el : $('#address-list')
-		});
 		function addPhone() {
+			var phoneList = $('#phone-list');
+			var newPhone = $('#new-phone');
+			phoneList.append('<option>' + newPhone.val() + '</option>');
+			phoneList.val(newPhone.val());
+			newPhone.val("");
 
-			var newPhone = $("#new-phone").val();
+		}
+		function removePhone() {
+			var selectedPhone = $('#phone-list :selected');
+			selectedPhone.remove();
+		}
+		function addAddress() {
+			var addressList = $('#address-list');
+			var pais = $('#new-address-country').val();
+			var provincia = $('#new-address-state').val();
+			var localidad = $('#new-address-city').val();
+			var calle = $('#new-address-st').val();
+			var nro = $('#new-address-number').val();
 
-			if (newPhone)
-				listaTelefonos.addDato(newPhone);
-			telView.render();
-			$("#new-phone").val(" ");
+			addressList.append('<option>'+calle.toUpperCase()+' '+nro+', '+localidad+', '+provincia+', '+pais+'</option>');
+		}
+		function removeAddress() {
+			var selectedAddress = $('#address-list :selected');
+		selectedAddress.remove();
+		$('#address-list').change();
 		}
 
 		$(document)
@@ -557,21 +475,7 @@
 						"change",
 						"#new-address-country",
 						function() {
-
-							if ($('#new-address-country :selected').val() == "AR") {
-								cargarProvinciasArgentina();
-
-							} else {
-
-								$('#new-address-state')
-										.html(
-												"<option disabled selected>Provincia</option><option id='add-state'>Nueva...</option>");
-
-								$('#new-address-city')
-										.html(
-												"<option disabled selected>Localidad</option><option id='add-city'>Nueva...</option>");
-
-							}
+changeSelectedCountry();
 
 						});
 
@@ -580,12 +484,34 @@
 						"change",
 						"#new-address-state",
 						function() {
-
-							cargarLocalidadesArgentina($(
-									"#new-address-state :selected").attr(
-									"data-id"));
-
+changeSelectedState();
 						});
+		function changeSelectedCountry(){
+			
+
+			if ($('#new-address-country :selected').val() == "AR") {
+				cargarProvinciasArgentina();
+
+			} else {
+
+				$('#new-address-state')
+						.html(
+								"<option disabled selected>Provincia</option><option id='add-state'>Nueva...</option>");
+
+				$('#new-address-city')
+						.html(
+								"<option disabled selected>Localidad</option><option id='add-city'>Nueva...</option>");
+
+			}
+		}
+		function changeSelectedState()
+		{
+
+			cargarLocalidadesArgentina($(
+					"#new-address-state :selected").attr(
+					"data-id"));
+
+		}
 		function sortResults(prop, asc, obj) {
 			var json = obj.sort(function(a, b) {
 				if (asc)
@@ -654,35 +580,7 @@
 									"http://localhost:8080");
 
 						});
-		function removePhone() {
-			//var indice = $("#phone-list").prop('selectedIndex');
-			listaTelefonos.removeDato($("#phone-list").val());
-			telView.render();
-			$("#new-phone").val(" ");
-		}
-		function addAddress() {
-			var calle = $('#new-address-st').val();
-			var numero = $('#new-address-number').val();
-			var pais = $('#new-address-country :selected').html();
-			var ciudad = $('#new-address-city').val();
-			var provincia = $('#new-address-state').val();
-			if (calle && numero && pais && ciudad && provincia)
 
-				var newAddress = calle + " " + numero + ", " + ciudad + ", "
-						+ provincia + ", " + pais;
-			newAddress = newAddress.toUpperCase();
-			listaDirecciones.addDato(newAddress);
-			addressView.render();
-
-		}
-		function removeAddress() {
-
-			//		var indice = $("#address-list").prop('selectedIndex');
-
-			listaDirecciones.removeDato($("#address-list").val());
-			addressView.render();
-			$("#new-address").val(" ");
-		}
 		function setLocation(loc) {
 			var seleccionado = $("#address-list :selected");
 

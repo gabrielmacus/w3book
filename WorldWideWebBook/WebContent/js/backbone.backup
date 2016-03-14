@@ -1,0 +1,158 @@
+//Publicacion = Backbone.Model.extend();
+		SelectionList = Backbone.Model.extend({
+			initialize : function() {
+			},
+
+			defaults : {
+
+				datos : []
+			},
+			addDato : function(newDato) {
+				var datosarray = this.get("datos");
+				datosarray.push(newDato);
+				this.set({
+					datos : datosarray
+				});
+			},
+			removeDato : function(dato) {
+				var datosarray = this.get("datos");
+
+				for (var i = 0; i < datosarray.length; i++) {
+
+					if ($.trim(dato) === $.trim(datosarray[i])) {
+						datosarray.splice(i, 1);
+					}
+				}
+
+				this.set({
+					datos : datosarray
+				});
+			}
+		});
+
+		var listaTelefonos = new SelectionList();
+		var listaDirecciones = new SelectionList();
+		//listaTelefonos.addDato("1234");
+
+		var ListView = Backbone.View.extend({
+			// el - stands for element. Every view has an element associated with HTML content, will be rendered.
+			//	el : $('#phone-list'),
+			// It's the first function called when this view is instantiated.
+			initialize : function() {
+				this.render();
+			},
+			// $el - it's a cached jQuery object (el), in which you can use jQuery functions to push content. Like the Hello TutorialsPoint in this case.
+
+			render : function() {
+
+				var modelo = this.model.get("datos");
+				//	$(this.el).html("");
+
+				var elements = $(this.el).find("option");
+
+				if (elements.length <= modelo.length) {//agrega
+					for (var i = 0; i < modelo.length; i++) {
+
+						var appendIt = true;
+
+						for (var j = 0; j < elements.length; j++) {
+							if ($.trim($(elements[j]).html()) === $
+									.trim(modelo[i])) {
+								appendIt = false;
+							}
+						}
+						if (appendIt) {
+							$(this.el).append(
+									"<option>" + modelo[i] + "</option>");
+						}
+					}
+
+				} else //elimina
+				{
+					//alert("ELIMINANDO "+modelo.length+" "+elements.length);
+
+					for (var i = 0; i < elements.length; i++) {
+
+						var exist = false;
+						for (var j = 0; j < modelo.length; j++) {
+
+							if ($.trim(modelo[j]) === $.trim($(elements[i])
+									.html())) {
+								exist = true;
+
+							}
+						}
+
+						if (!exist) {
+							//	alert("A eliminar:"+$(elements[i]).html());
+							//elementsToremove+=";"+i; 
+							$(elements[i]).remove();
+						}
+
+					}
+
+				}
+
+				$(this.el).val(modelo[modelo.length - 1]);
+				$(this.el).change();
+				//$(this.el).prop('selectedIndex',0);
+
+				//$(this.el).val(modelo[modelo.length - 1]);
+			}
+		});
+
+		var telView = new ListView({
+			model : listaTelefonos,
+			el : $('#phone-list')
+		});
+
+		var addressView = new ListView({
+
+			model : listaDirecciones,
+			el : $('#address-list')
+		});
+		
+		
+		
+		
+		
+		
+				function addPhone() {
+
+			var newPhone = $("#new-phone").val();
+
+			if (newPhone)
+				listaTelefonos.addDato(newPhone);
+			telView.render();
+			$("#new-phone").val(" ");
+		}
+
+		function removePhone() {
+			//var indice = $("#phone-list").prop('selectedIndex');
+			listaTelefonos.removeDato($("#phone-list").val());
+			telView.render();
+			$("#new-phone").val(" ");
+		}
+		function addAddress() {
+			var calle = $('#new-address-st').val();
+			var numero = $('#new-address-number').val();
+			var pais = $('#new-address-country :selected').html();
+			var ciudad = $('#new-address-city').val();
+			var provincia = $('#new-address-state').val();
+			if (calle && numero && pais && ciudad && provincia)
+
+				var newAddress = calle + " " + numero + ", " + ciudad + ", "
+						+ provincia + ", " + pais;
+			newAddress = newAddress.toUpperCase();
+			listaDirecciones.addDato(newAddress);
+			addressView.render();
+
+		}
+		function removeAddress() {
+
+			//		var indice = $("#address-list").prop('selectedIndex');
+
+			listaDirecciones.removeDato($("#address-list").val());
+			addressView.render();
+			$("#new-address").val(" ");
+		}

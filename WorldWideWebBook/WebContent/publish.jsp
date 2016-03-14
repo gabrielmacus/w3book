@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="java.util.List"%>
@@ -9,18 +11,19 @@
     pageEncoding="ISO-8859-1"%>
 <%
 DiskFileItemFactory factory=new DiskFileItemFactory();
-String titulo=request.getParameter("title");
-String descripcion=request.getParameter("description");
-String telefonos =request.getParameter("phone-list");
 ServletFileUpload s =new ServletFileUpload(factory);
 List<FileItem> fileItems =s.parseRequest(request);
 
+Map<String,String>fieldMap =new HashMap<String,String>();
+
+
+out.write("<ul>");
 for(FileItem f : fileItems)
 {
 	if(f.isFormField())
 	{
-		out.println("\n-----");
-	out.write(f.getString());
+		fieldMap.put(f.getFieldName(),f.getString());
+	out.println("<li>"+f.getFieldName()+"</li>");
 	}
-}
+}out.write("</ul>");
 %>

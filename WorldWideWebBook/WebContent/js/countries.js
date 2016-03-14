@@ -7,7 +7,7 @@ $(document).ready(function(){
 function setCountries()
 {
 	
-	$("#new-address-country").append(  "	<option value=\"AF\">Afghanistan</option>\n" +
+	$("#new-address-country").append("<option value=\"AR\">Argentina</option>" /* "	<option value=\"AF\">Afghanistan</option>\n" +
 			"	<option value=\"AX\">Åland Islands</option>\n" +
 			"	<option value=\"AL\">Albania</option>\n" +
 			"	<option value=\"DZ\">Algeria</option>\n" +
@@ -255,7 +255,7 @@ function setCountries()
 			"	<option value=\"EH\">Western Sahara</option>\n" +
 			"	<option value=\"YE\">Yemen</option>\n" +
 			"	<option value=\"ZM\">Zambia</option>\n" +
-			"	<option value=\"ZW\">Zimbabwe</option>"
+			"	<option value=\"ZW\">Zimbabwe</option>"*/
 			    );
 	
 }
